@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let author = document.getElementById("author");
         let pages = document.getElementById("pages");
         let read = document.getElementById("read");
-        addBookToLibrary(title, author, pages, read);
+        addBookToLibrary(title.value, author.value, pages.value, read.checked ? "yes" : "no");
     })
 });
 
