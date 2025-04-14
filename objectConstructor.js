@@ -22,7 +22,6 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(newBook);
 }
 
-//modificar depois
 function showBooks() {
     generateTable();
 }
@@ -41,33 +40,33 @@ function generateTable() {
     });
     tblBody.appendChild(headerRow);
   
-  // for each book create all cell info 1 by 1
-  for (let i = 0; i < myLibrary.length; i++) {
-    const book = myLibrary[i];
-    const row = document.createElement("tr");
+    // for each book create all cell info 1 by 1
+    for (let i = 0; i < myLibrary.length; i++) {
+        const book = myLibrary[i];
+        const row = document.createElement("tr");
 
-    const titleCell = document.createElement("td");
-    titleCell.textContent = book.title;
-    row.appendChild(titleCell);
+        const titleCell = document.createElement("td");
+        titleCell.textContent = book.title;
+        row.appendChild(titleCell);
 
-    const authorCell = document.createElement("td");
-    authorCell.textContent = book.author;
-    row.appendChild(authorCell);
+        const authorCell = document.createElement("td");
+        authorCell.textContent = book.author;
+        row.appendChild(authorCell);
 
-    const pagesCell = document.createElement("td");
-    pagesCell.textContent = book.pages;
-    row.appendChild(pagesCell);
+        const pagesCell = document.createElement("td");
+        pagesCell.textContent = book.pages;
+        row.appendChild(pagesCell);
 
-    const readCell = document.createElement("td");
-    readCell.textContent = book.getReadStatus();
-    row.appendChild(readCell);
+        const readCell = document.createElement("td");
+        readCell.textContent = book.getReadStatus();
+        row.appendChild(readCell);
 
-    const idCell = document.createElement("td");
-    idCell.textContent = book.id;
-    row.appendChild(idCell);
+        const idCell = document.createElement("td");
+        idCell.textContent = book.id;
+        row.appendChild(idCell);
 
-    tblBody.appendChild(row);
-  }
+        tblBody.appendChild(row);
+    }
   
     // put the <tbody> in the <table>
     tbl.appendChild(tblBody);
@@ -75,7 +74,30 @@ function generateTable() {
     document.body.appendChild(tbl);
     // sets the border attribute of tbl to '2'
     tbl.setAttribute("border", "2");
-  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var btn = document.getElementById('btn_form');
+    var form = document.getElementById('my_form');
+    
+    btn.addEventListener('click', function() {
+      if(form.style.display != 'block') {
+        form.style.display = 'block';
+        return;
+      }
+      form.style.display = 'none';
+    });
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let title = document.getElementById("title");
+        let author = document.getElementById("author");
+        let pages = document.getElementById("pages");
+        let read = document.getElementById("read");
+        addBookToLibrary(title, author, pages, read);
+    })
+});
+
+
 
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, "yes");
 addBookToLibrary("1984", "George Orwell", 328, "no");
