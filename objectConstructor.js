@@ -14,6 +14,10 @@ function Book(id, title, author, pages, read) {
     function info() {
         return title + ", " + author + ", " + pages + ", " + read;
     }
+
+    Book.prototype.changeStatus = function() {
+        this.read = this.read === "yes" ? "no" : "yes";
+    }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -64,6 +68,28 @@ function generateTable() {
         const idCell = document.createElement("td");
         idCell.textContent = book.id;
         row.appendChild(idCell);
+
+        const changeReadStatus = document.createElement("td");
+        const changeReadStatusButton = document.createElement("button");
+        changeReadStatusButton.textContent = "change read";
+        changeReadStatusButton.addEventListener("click", () => {
+            book.changeStatus();
+        });
+        changeReadStatus.appendChild(changeReadStatusButton);
+        row.appendChild(changeReadStatus);
+
+        const removeBook = document.createElement("td");
+        const removeBookButton = document.createElement("button");
+        removeBookButton.textContent = "remove book";
+        removeBookButton.addEventListener("click", () => {
+            row.remove();
+            const index = myLibrary.findIndex(b => b.id === book.id);
+            if (index !== -1) {
+                myLibrary.splice(index, 1);
+            }
+        });
+        removeBook.appendChild(removeBookButton);
+        row.appendChild(removeBook);
 
         tblBody.appendChild(row);
     }
